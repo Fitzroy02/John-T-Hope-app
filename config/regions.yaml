@@ -1,0 +1,28 @@
+regions:
+  - Africa
+  - Europe
+  - Asia
+  - Latin America
+  - North America
+  - Middle East
+  - Oceania
+
+spotlight_cycle:
+  Q1: [Africa, Europe, Asia]
+  Q2: [Latin America, Middle East, Oceania]
+  Q3: [Africa, Europe, Asia]
+  Q4: [Latin America, Middle East, Oceania]
+
+monthly_spotlight:
+  1: Africa
+  2: Europe
+  3: Asia
+  4: Latin America
+  5: Middle East
+  6: Oceania
+  7: Africa
+  8: Europe
+  9: Asia
+  10: Latin America
+  11: Middle East
+  12: Oceania
