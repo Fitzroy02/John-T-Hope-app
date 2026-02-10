@@ -1,0 +1,121 @@
+year: 2027
+
+fortnights:
+  - id: F1
+    start: 2027-01-01
+    end: 2027-01-14
+    films: 26
+  - id: F2
+    start: 2027-01-15
+    end: 2027-01-28
+    films: 26
+  - id: F3
+    start: 2027-01-29
+    end: 2027-02-11
+    films: 26
+  - id: F4
+    start: 2027-02-12
+    end: 2027-02-25
+    films: 26
+  - id: F5
+    start: 2027-02-26
+    end: 2027-03-11
+    films: 26
+  - id: F6
+    start: 2027-03-12
+    end: 2027-03-25
+    films: 26
+  - id: F7
+    start: 2027-03-26
+    end: 2027-04-08
+    films: 26
+  - id: F8
+    start: 2027-04-09
+    end: 2027-04-22
+    films: 26
+  - id: F9
+    start: 2027-04-23
+    end: 2027-05-06
+    films: 26
+  - id: F10
+    start: 2027-05-07
+    end: 2027-05-20
+    films: 26
+  - id: F11
+    start: 2027-05-21
+    end: 2027-06-03
+    films: 26
+  - id: F12
+    start: 2027-06-04
+    end: 2027-06-17
+    films: 26
+  - id: F13
+    start: 2027-06-18
+    end: 2027-07-01
+    films: 26
+  - id: F14
+    start: 2027-07-02
+    end: 2027-07-15
+    films: 26
+  - id: F15
+    start: 2027-07-16
+    end: 2027-07-29
+    films: 26
+  - id: F16
+    start: 2027-07-30
+    end: 2027-08-12
+    films: 26
+  - id: F17
+    start: 2027-08-13
+    end: 2027-08-26
+    films: 26
+  - id: F18
+    start: 2027-08-27
+    end: 2027-09-09
+    films: 26
+  - id: F19
+    start: 2027-09-10
+    end: 2027-09-23
+    films: 26
+  - id: F20
+    start: 2027-09-24
+    end: 2027-10-07
+    films: 26
+  - id: F21
+    start: 2027-10-08
+    end: 2027-10-21
+    films: 26
+  - id: F22
+    start: 2027-10-22
+    end: 2027-11-04
+    films: 26
+  - id: F23
+    start: 2027-11-05
+    end: 2027-11-18
+    films: 26
+  - id: F24
+    start: 2027-11-19
+    end: 2027-12-02
+    films: 26
+  - id: F25
+    start: 2027-12-03
+    end: 2027-12-16
+    films: 26
+  - id: F26
+    start: 2027-12-17
+    end: 2027-12-30
+    films: 26
+
+months:
+  1: { premieres: 4 }
+  2: { premieres: 4 }
+  3: { premieres: 4 }
+  4: { premieres: 4 }
+  5: { premieres: 4 }
+  6: { premieres: 4 }
+  7: { premieres: 4 }
+  8: { premieres: 4 }
+  9: { premieres: 4 }
+  10: { premieres: 4 }
+  11: { premieres: 4 }
+  12: { premieres: 4 }
