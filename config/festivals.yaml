@@ -4,118 +4,21 @@ festivals:
     region: "North America"
     intake_window: "2027-02-01 to 2027-03-31"
     max_films_per_year: 20
-  
+
   - id: berlinale
     name: "Berlinale"
     region: "Europe"
     intake_window: "2027-03-01 to 2027-04-30"
     max_films_per_year: 15
-  
-  - id: tiff
-    name: "Toronto International Film Festival"
-    region: "North America"
-    intake_window: "2027-09-01 to 2027-10-31"
-    max_films_per_year: 18
-  
-  - id: cannes
-    name: "Cannes"
+
+  - id: locarno
+    name: "Locarno"
     region: "Europe"
-    intake_window: "2027-05-01 to 2027-06-30"
-    max_films_per_year: 15
-  
-  - id: durban
-    name: "Durban International Film Festival"
-    region: "Africa"
-    intake_window: "2027-07-01 to 2027-08-31"
-    max_films_per_year: 12
-  
-  - id: busan
-    name: "Busan International Film Festival"
-    region: "Asia"
-    intake_window: "2027-10-01 to 2027-11-30"
-    max_films_per_year: 15
-  
-  - id: guadalajara
-    name: "Guadalajara International Film Festival"
-    region: "Latin America"
-    intake_window: "2027-03-01 to 2027-04-30"
-    max_films_per_year: 12
-  
-  - id: dubai
-    name: "Dubai International Film Festival"
-    region: "Middle East"
-    intake_window: "2027-12-01 to 2028-01-31"
+    intake_window: "2027-08-01 to 2027-09-15"
     max_films_per_year: 10
-  
-  - id: sydney
-    name: "Sydney Film Festival"
-    region: "Oceania"
-    intake_window: "2027-06-01 to 2027-07-31"
-    max_films_per_year: 12
 
 pipeline_rules:
   - "Festival films must be mapped to a region and genre."
-  - "No more than 30% of annual premieres may come from A-list festivals."
-  - "At least 40% of premieres must come from under-represented regions or festivals."
+  - "No more than 30% of annual premieres may come from A‑list festivals."
+  - "At least 40% of premieres must come from under‑represented regions or festivals."
   - "Festival intake must be scheduled into the annual release calendar without breaking cadence."
-
-workflow:
-  step_1:
-    name: "Festival Identification"
-    description: "Festival identifies candidate films"
-    responsible: "Festival partners and scouts"
-    output: "Candidate film list with metadata"
-  
-  step_2:
-    name: "Curatorial Selection"
-    description: "Curatorial team selects based on region, genre, and balance"
-    responsible: "John T Hope curatorial team"
-    criteria:
-      - "Regional diversity (maps to regions.yaml)"
-      - "Genre balance (maps to genre_rotation.yaml)"
-      - "Festival distribution (respects pipeline_rules)"
-      - "Artistic merit and platform alignment"
-    output: "Approved film list for scheduling"
-  
-  step_3:
-    name: "Calendar Scheduling"
-    description: "Films are slotted into the annual release calendar"
-    responsible: "Programming team"
-    constraints:
-      - constraint: "Genre rotation"
-        reference: "genre_rotation.yaml"
-        rule: "Must align with 5 featured genres per fortnight"
-      - constraint: "Regional spotlight"
-        reference: "regions.yaml"
-        rule: "Priority given to current month's spotlight region"
-      - constraint: "Premiere capacity"
-        reference: "release_calendar.yaml"
-        rule: "Maximum 4 premieres per month"
-      - constraint: "Fortnight cadence"
-        reference: "release_calendar.yaml"
-        rule: "26 films every 2 weeks must be maintained"
-    output: "Scheduled release dates for each film"
-  
-  step_4:
-    name: "Rights Confirmation"
-    description: "Contracts and rights confirmed"
-    responsible: "Legal and acquisitions team"
-    requirements:
-      - "Distribution rights for target regions"
-      - "Streaming rights for platform"
-      - "Duration and exclusivity terms"
-      - "Artist agreements and approvals"
-    output: "Signed contracts and cleared films"
-  
-  step_5:
-    name: "Premiere Ceremony Application"
-    description: "Premiere ceremony structure applied"
-    responsible: "Marketing and content team"
-    reference: "premiere_structure.yaml"
-    phases:
-      - "Announcement (T-7 days)"
-      - "Artist Introduction (T-1 day)"
-      - "Premiere Window (T to T+3 days)"
-      - "Reflection Phase (T+3 to T+7 days)"
-      - "Archive & Rotation (post T+7)"
-    output: "Fully orchestrated premiere experience"
