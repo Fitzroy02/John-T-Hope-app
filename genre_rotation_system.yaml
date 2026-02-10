@@ -1,0 +1,21 @@
+# Genre Rotation System
+# Ensures balanced diversity across fortnightly film waves
+
+genres:
+  - Drama
+  - Comedy
+  - Documentary
+  - World Cinema
+  - Experimental
+  - Animation
+  - Thriller
+  - Romance
+  - Political
+  - Art House
+
+rotation:
+  fortnight_slots: 5
+  rules:
+    - no_genre_repeats_in_consecutive_fortnights: true
+    - minimum_appearances_per_year: 4
+    - maximum_appearances_per_year: 10
