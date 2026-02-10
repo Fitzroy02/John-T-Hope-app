@@ -1,0 +1,25 @@
+premiere:
+  weekly_slot: true
+
+  elements:
+    - name: Announcement
+      timing: "T-7 days"
+      channels: ["homepage_banner", "email", "social_stub"]
+
+    - name: Artist Introduction
+      timing: "T-1 day"
+      format: "short video or written note"
+
+    - name: Premiere Window
+      timing: "T to T+3 days"
+      features:
+        live_chat_optional: true
+        moment_capture_highlighted: true
+
+    - name: Reflection Phase
+      timing: "T+3 to T+7 days"
+      focus: "moments, reviews, Q&A"
+
+    - name: Archive & Rotation
+      timing: "post T+7"
+      state: "moves into catalogue"
