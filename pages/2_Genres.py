@@ -1,4 +1,7 @@
 import streamlit as st
+import auth
+
+st.page_link("streamlit_app.py", label="⬅ Back to Home")
 
 st.title("🎭 Genre Rotation")
 

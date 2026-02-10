@@ -1,25 +1,61 @@
 import streamlit as st
+import auth
+from datetime import datetime
+from data import ARTISTS, FILMS, MUSIC
+from utils import get_music_status, get_film_status
+
+st.page_link("streamlit_app.py", label="⬅ Back to Home")
 
 st.title("🎨 Artist Pages")
 
-artists = {
-    "Aiko Tanaka": {
-        "bio": "Japanese filmmaker known for minimalist emotional storytelling.",
-        "upcoming": "The Silent Path – 1 March 2026",
-        "event": "Tokyo Release Party – 28 February 2026"
-    },
-    "Jonas Ravn": {
-        "bio": "Norwegian director exploring isolation and landscape.",
-        "upcoming": "Night Train to Oslo – 12 March 2026",
-        "event": "Oslo Premiere – 10 March 2026"
+# Build artist data with works
+artists_data = {}
+for artist_name, artist_info in ARTISTS.items():
+    works = []
+    for work_id in artist_info["works"]:
+        # Check if it's a film
+        film = next((f for f in FILMS if f["id"] == work_id), None)
+        if film:
+            works.append({
+                "title": film["title"],
+                "type": "film",
+                "release_date": film["release_date"]
+            })
+        else:
+            # Check if it's music
+            music = next((m for m in MUSIC if m["id"] == work_id), None)
+            if music:
+                works.append({
+                    "title": music["title"],
+                    "type": "music",
+                    "release_date": music["release_date"]
+                })
+    
+    artists_data[artist_name] = {
+        "bio": artist_info["bio"],
+        "works": works
     }
-}
 
-choice = st.selectbox("Choose an artist", list(artists.keys()))
-
-data = artists[choice]
+choice = st.selectbox("Choose an artist", list(artists_data.keys()))
+data = artists_data[choice]
 
 st.subheader(choice)
 st.write(f"**Bio:** {data['bio']}")
-st.write(f"**Upcoming Release:** {data['upcoming']}")
-st.write(f"**Event:** {data['event']}")
+
+st.divider()
+st.subheader("Works")
+
+for w in data["works"]:
+    st.write(f"### {w['title']} ({w['type']})")
+
+    if w["type"] == "music":
+        status, days = get_music_status(w["release_date"])
+    else:
+        status, days = get_film_status(w["release_date"])
+
+    st.write(f"**Status:** {status}")
+    if days:
+        st.write(f"⏳ {days} days remaining")
+
+    st.write(f"**Release Date:** {w['release_date'].strftime('%d %B %Y')}")
+st.divider()

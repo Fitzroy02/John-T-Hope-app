@@ -1,21 +1,43 @@
 import streamlit as st
-from datetime import datetime, timedelta
+import auth
+from data import FILMS, MUSIC
+from utils import get_music_status, get_film_status
+
+st.page_link("streamlit_app.py", label="⬅ Back to Home")
 
 st.title("📅 Release Hub")
 
-st.write("Upcoming releases, countdowns, and event information.")
+# Combine films and music
+releases = []
+for film in FILMS:
+    releases.append({
+        "title": film["title"],
+        "artist": film["artist"],
+        "type": "film",
+        "release_date": film["release_date"]
+    })
 
-# Example data
-releases = [
-    {"title": "The Silent Path", "artist": "Aiko Tanaka", "release_date": datetime(2026, 3, 1)},
-    {"title": "Night Train to Oslo", "artist": "Jonas Ravn", "release_date": datetime(2026, 3, 12)},
-    {"title": "Dust & Honey", "artist": "Marisol Vega", "release_date": datetime(2026, 4, 5)},
-]
+for music in MUSIC:
+    releases.append({
+        "title": music["title"],
+        "artist": music["artist"],
+        "type": "music",
+        "release_date": music["release_date"]
+    })
 
 for r in releases:
-    days_left = (r["release_date"] - datetime.now()).days
     st.subheader(r["title"])
     st.write(f"**Artist:** {r['artist']}")
+    st.write(f"**Type:** {r['type'].capitalize()}")
     st.write(f"**Release Date:** {r['release_date'].strftime('%d %B %Y')}")
-    st.write(f"⏳ **Countdown:** {days_left} days remaining")
+
+    if r["type"] == "music":
+        status, days = get_music_status(r["release_date"])
+    else:
+        status, days = get_film_status(r["release_date"])
+
+    st.write(f"**Status:** {status}")
+    if days:
+        st.write(f"⏳ **Time remaining:** {days} days")
+
     st.divider()
