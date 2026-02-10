@@ -1,0 +1,1 @@
+# Added artist-only role check

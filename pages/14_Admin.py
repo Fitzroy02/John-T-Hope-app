@@ -1,0 +1,1 @@
+# Admin panel with database overview and content counts
