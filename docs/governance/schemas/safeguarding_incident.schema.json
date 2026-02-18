@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Safeguarding Incident",
+  "description": "Schema for recording safeguarding incidents in the John T Hope Centre incident registry",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the incident"
+    },
+    "reported_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the incident was reported"
+    },
+    "reported_by": {
+      "type": "string",
+      "description": "Identifier of the person or system that reported the incident"
+    },
+    "age_tier": {
+      "type": "string",
+      "description": "Age tier affected by the incident (if applicable)"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "content_risk",
+        "behavioural_risk",
+        "consent_violation",
+        "neutrality_violation",
+        "technical_anomaly"
+      ],
+      "description": "Category of the safeguarding incident"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the incident"
+    },
+    "immediate_action_taken": {
+      "type": "string",
+      "description": "Description of any immediate actions taken in response to the incident"
+    },
+    "requires_external_escalation": {
+      "type": "boolean",
+      "description": "Whether the incident requires escalation to external authorities"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "under_review",
+        "closed"
+      ],
+      "description": "Current status of the incident"
+    },
+    "resolution_summary": {
+      "type": "string",
+      "description": "Summary of how the incident was resolved (if closed)"
+    }
+  },
+  "required": [
+    "id",
+    "reported_at",
+    "reported_by",
+    "category",
+    "description",
+    "status"
+  ]
+}
