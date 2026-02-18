@@ -14,19 +14,16 @@ No curriculum, policy, or guidance produced by the John T Hope Centre may be inf
 
 The 10-Year Political Buffer Rule exists to:
 
-### 1. Ensure Stability
-The curriculum is not subject to the volatility of contemporary politics.
+### 1. Ensure Curriculum Stability
+The curriculum is not subject to the volatility of contemporary politics or transient cultural movements.
 
-### 2. Reduce Volatility
-Institutional decisions are insulated from transient political pressures and cultural movements.
-
-### 3. Protect Learners from Contemporary Pressure
+### 2. Protect Learners from Political Pressure
 Children and families are shielded from partisan influence and ideological recruitment.
 
-### 4. Maintain Institutional Neutrality
+### 3. Maintain Institutional Neutrality
 The Centre does not become a tool of any political movement, party, or faction.
 
-### 5. Allow Historical Perspective
+### 4. Allow Historical Perspective
 Events and ideas are examined with scholarly distance, not immediate emotional reaction.
 
 ---

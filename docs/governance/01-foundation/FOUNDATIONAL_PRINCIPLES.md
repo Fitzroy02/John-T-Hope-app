@@ -50,8 +50,8 @@ No curriculum, policy, or guidance may be influenced by political events, contro
 
 This ensures:
 - **Stability** — The curriculum is not subject to political volatility
-- **Reduced Volatility** — Institutional decisions are insulated from contemporary pressure
-- **Protection from Contemporary Pressure** — Learners are shielded from partisan influence
+- **Insulation from Pressure** — Institutional decisions are protected from contemporary political pressure
+- **Protection for Learners** — Children and families are shielded from partisan influence
 
 ### In Practice
 - Political history is taught with temporal distance
