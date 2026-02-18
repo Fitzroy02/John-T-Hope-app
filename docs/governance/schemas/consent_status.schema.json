@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hopenism.org/schemas/consent_status.schema.json",
+  "title": "Consent Status Schema",
+  "description": "Defines the structure for tracking consent for learner interactions and content access",
+  "type": "object",
+  "required": [
+    "id",
+    "learner_id",
+    "consent_type",
+    "granted"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this consent record",
+      "pattern": "^consent_[a-z0-9_-]+$",
+      "examples": ["consent_abc123", "consent_learner_001_general"]
+    },
+    "learner_id": {
+      "type": "string",
+      "description": "Unique identifier for the learner",
+      "minLength": 1,
+      "examples": ["learner_001", "user_xyz789"]
+    },
+    "parent_or_guardian_id": {
+      "type": "string",
+      "description": "Unique identifier for the parent or guardian (if applicable)",
+      "minLength": 1,
+      "examples": ["guardian_abc123", "parent_xyz789"]
+    },
+    "consent_type": {
+      "type": "string",
+      "description": "The type of consent being granted or denied",
+      "enum": [
+        "general_access",
+        "sensitive_content",
+        "data_processing",
+        "live_interaction"
+      ],
+      "examples": ["general_access", "sensitive_content"]
+    },
+    "granted": {
+      "type": "boolean",
+      "description": "Whether consent has been granted (true) or denied (false)"
+    },
+    "granted_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when consent was granted (ISO 8601 format)",
+      "examples": ["2027-02-18T19:34:00Z", "2027-06-15T14:30:00+00:00"]
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when consent expires (ISO 8601 format). Null or omitted means no expiration.",
+      "examples": ["2028-02-18T19:34:00Z", "2028-06-15T14:30:00+00:00"]
+    },
+    "revoked_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when consent was revoked (ISO 8601 format). Null or omitted means not revoked.",
+      "examples": ["2027-12-01T10:00:00Z"]
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional context, conditions, or special considerations for this consent",
+      "examples": [
+        "Consent granted for healthcare curriculum only.",
+        "Parent requested notification before accessing sensitive historical content."
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "granted": { "const": true }
+        }
+      },
+      "then": {
+        "required": ["granted_at"]
+      }
+    }
+  ]
+}

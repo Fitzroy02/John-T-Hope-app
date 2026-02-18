@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hopenism.org/schemas/age_tier.schema.json",
+  "title": "Age Tier Schema",
+  "description": "Defines the structure for age-tier classification in curriculum governance",
+  "type": "object",
+  "required": [
+    "id",
+    "label",
+    "min_age",
+    "max_age",
+    "cognitive_profile",
+    "permitted_content_categories",
+    "restricted_content_categories",
+    "parental_consent_required"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the age tier (e.g., 'tier_1', 'tier_primary')",
+      "pattern": "^tier_[a-z0-9_]+$",
+      "examples": ["tier_early_years", "tier_primary", "tier_secondary", "tier_adult"]
+    },
+    "label": {
+      "type": "string",
+      "description": "Human-readable name for the age tier",
+      "minLength": 1,
+      "maxLength": 100,
+      "examples": ["Early Years (Ages 3-5)", "Primary (Ages 5-11)", "Secondary (Ages 11-18)"]
+    },
+    "min_age": {
+      "type": "integer",
+      "description": "Minimum age in years for this tier",
+      "minimum": 0,
+      "maximum": 120
+    },
+    "max_age": {
+      "type": "integer",
+      "description": "Maximum age in years for this tier",
+      "minimum": 0,
+      "maximum": 120
+    },
+    "cognitive_profile": {
+      "type": "string",
+      "description": "Description of cognitive capabilities, emotional maturity, and developmental characteristics for this tier",
+      "minLength": 1,
+      "examples": [
+        "Developing concrete reasoning; limited abstract thinking; high curiosity; emotionally vulnerable.",
+        "Emerging abstract reasoning; increased emotional resilience; developing critical thinking skills.",
+        "Fully developed abstract reasoning; high emotional resilience; capable of complex analysis."
+      ]
+    },
+    "permitted_content_categories": {
+      "type": "array",
+      "description": "Categories of content that are permitted for this age tier",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "examples": [
+        ["foundational_literacy", "basic_numeracy", "creative_expression"],
+        ["advanced_mathematics", "scientific_inquiry", "historical_analysis"]
+      ]
+    },
+    "restricted_content_categories": {
+      "type": "array",
+      "description": "Categories of content that are restricted for this age tier",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "examples": [
+        ["political_content", "graphic_history", "mature_themes"],
+        ["explicit_violence", "sexual_content", "disturbing_imagery"]
+      ]
+    },
+    "parental_consent_required": {
+      "type": "boolean",
+      "description": "Whether parental or guardian consent is mandatory for learners in this tier"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional context, guidance, or special considerations for this tier",
+      "examples": [
+        "Content must be concrete, emotionally safe, and scaffolded for early learners.",
+        "Learners at this tier can engage with nuanced topics but require contextual framing."
+      ]
+    }
+  },
+  "additionalProperties": false
+}
