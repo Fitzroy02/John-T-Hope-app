@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Interaction Log",
+  "description": "Schema for logging interactions between learners and instructors in educational environments",
+  "type": "object",
+  "required": [
+    "id",
+    "learner_id",
+    "instructor_id",
+    "module_id",
+    "timestamp",
+    "interaction_type"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the interaction log entry",
+      "pattern": "^log_[a-zA-Z0-9_-]+$",
+      "examples": ["log_12345", "log_abc_2026_02_18"]
+    },
+    "learner_id": {
+      "type": "string",
+      "description": "Unique identifier for the learner",
+      "pattern": "^learner_[a-zA-Z0-9_-]+$",
+      "examples": ["learner_67890", "learner_john_doe"]
+    },
+    "instructor_id": {
+      "type": "string",
+      "description": "Unique identifier for the instructor",
+      "pattern": "^instructor_[a-zA-Z0-9_-]+$",
+      "examples": ["instructor_11111", "instructor_jane_smith"]
+    },
+    "module_id": {
+      "type": "string",
+      "description": "Unique identifier for the learning module",
+      "pattern": "^module_[a-zA-Z0-9_-]+$",
+      "examples": ["module_math_101", "module_puberty_education_t2"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the interaction (ISO 8601 format)",
+      "examples": ["2026-02-18T10:30:00Z", "2026-03-15T14:45:30Z"]
+    },
+    "interaction_type": {
+      "type": "string",
+      "description": "Type of interaction between learner and instructor",
+      "enum": [
+        "question",
+        "response",
+        "feedback",
+        "flagged_event"
+      ],
+      "examples": ["question", "response", "feedback", "flagged_event"]
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or context about the interaction",
+      "maxLength": 5000
+    },
+    "content": {
+      "type": "string",
+      "description": "Content of the interaction (message, question, feedback text)",
+      "maxLength": 10000
+    },
+    "duration_seconds": {
+      "type": "integer",
+      "description": "Duration of the interaction in seconds (for video calls, live sessions)",
+      "minimum": 0
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Identifier for the broader session or class this interaction belongs to",
+      "examples": ["session_abc123", "class_2026_02_18_morning"]
+    },
+    "flagged": {
+      "type": "boolean",
+      "description": "Whether this interaction has been flagged for safeguarding review",
+      "default": false
+    },
+    "flagged_reason": {
+      "type": "string",
+      "description": "Reason for flagging (if flagged is true)",
+      "examples": [
+        "Safeguarding keyword detected",
+        "Unusual interaction pattern",
+        "Parent-reported concern",
+        "Late-night messaging"
+      ]
+    },
+    "flagged_by": {
+      "type": "string",
+      "description": "Who or what flagged this interaction (system, parent, learner, administrator)",
+      "enum": ["system", "parent", "learner", "administrator", "instructor"],
+      "examples": ["system", "parent", "administrator"]
+    },
+    "reviewed": {
+      "type": "boolean",
+      "description": "Whether a flagged interaction has been reviewed by a safeguarding officer",
+      "default": false
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Name or identifier of the safeguarding officer who reviewed the interaction"
+    },
+    "reviewed_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the interaction was reviewed (ISO 8601 format)"
+    },
+    "review_outcome": {
+      "type": "string",
+      "description": "Outcome of the safeguarding review",
+      "enum": [
+        "no_action_required",
+        "instructor_warned",
+        "instructor_suspended",
+        "escalated_to_authorities",
+        "false_positive"
+      ],
+      "examples": [
+        "no_action_required",
+        "instructor_warned",
+        "escalated_to_authorities"
+      ]
+    },
+    "parent_notified": {
+      "type": "boolean",
+      "description": "Whether the learner's parent was notified about this interaction or review",
+      "default": false
+    },
+    "parent_notified_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the parent was notified (ISO 8601 format)"
+    },
+    "visibility": {
+      "type": "string",
+      "description": "Who can access this interaction log",
+      "enum": ["public", "instructor", "learner", "parent", "admin_only"],
+      "default": "parent",
+      "examples": ["parent", "admin_only"]
+    },
+    "retention_until": {
+      "type": "string",
+      "format": "date",
+      "description": "Date until which this log is retained (7 years from interaction date)",
+      "examples": ["2033-02-18"]
+    }
+  }
+}
