@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hopenism.org/schemas/device_safety_profile.schema.json",
+  "title": "Device Safety Profile",
+  "description": "Schema for healthcare device safety profiles used in governance and content delivery",
+  "type": "object",
+  "required": [
+    "id",
+    "device_name",
+    "category",
+    "risk_level",
+    "age_tier_restrictions",
+    "requires_parental_consent"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the device profile",
+      "pattern": "^[a-z0-9_-]+$",
+      "examples": ["thermometer_001", "epipen_001", "blood_glucose_monitor_001"]
+    },
+    "device_name": {
+      "type": "string",
+      "description": "Generic name of the device (not brand-specific)",
+      "minLength": 1,
+      "maxLength": 200,
+      "examples": ["Thermometer", "EpiPen (Epinephrine Auto-Injector)", "Blood Glucose Monitor"]
+    },
+    "category": {
+      "type": "string",
+      "description": "Device category determining governance level",
+      "enum": [
+        "awareness_only",
+        "general_use",
+        "specialist_device"
+      ]
+    },
+    "risk_level": {
+      "type": "string",
+      "description": "Risk level if device is misused",
+      "enum": [
+        "low",
+        "moderate",
+        "high"
+      ]
+    },
+    "age_tier_restrictions": {
+      "type": "object",
+      "description": "Minimum ages for different content access levels",
+      "required": ["awareness_age"],
+      "properties": {
+        "awareness_age": {
+          "type": "integer",
+          "description": "Minimum age for awareness content about the device",
+          "minimum": 0,
+          "maximum": 18,
+          "examples": [5, 8, 11]
+        },
+        "supervised_use_age": {
+          "type": "integer",
+          "description": "Minimum age for supervised usage information (optional)",
+          "minimum": 0,
+          "maximum": 18,
+          "examples": [13, 16]
+        },
+        "independent_use_age": {
+          "type": "integer",
+          "description": "Minimum age for independent usage information (optional, typically only for general_use devices)",
+          "minimum": 0,
+          "maximum": 18,
+          "examples": [16, 18]
+        }
+      },
+      "additionalProperties": false
+    },
+    "requires_parental_consent": {
+      "type": "boolean",
+      "description": "Whether parental consent is required for content access (jurisdiction-dependent enforcement)"
+    },
+    "regulatory_status": {
+      "type": "object",
+      "description": "Regulatory approval information (optional)",
+      "properties": {
+        "fda_approved": {
+          "type": "boolean",
+          "description": "Whether device is FDA approved (US)"
+        },
+        "ce_marked": {
+          "type": "boolean",
+          "description": "Whether device is CE marked (Europe)"
+        },
+        "other_approvals": {
+          "type": "array",
+          "description": "Other regulatory approvals",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["TGA (Australia)", "Health Canada"]]
+        }
+      },
+      "additionalProperties": false
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional context, considerations, or special requirements",
+      "maxLength": 1000,
+      "examples": [
+        "Requires prescription in most jurisdictions. Professional training mandatory.",
+        "Available over-the-counter. Supervision recommended for users under 16.",
+        "Device availability varies by country. Not available in all markets."
+      ]
+    },
+    "content_guidelines": {
+      "type": "object",
+      "description": "Specific content creation guidelines for this device (optional)",
+      "properties": {
+        "emphasize_professional_training": {
+          "type": "boolean",
+          "description": "Whether content must emphasize need for professional training"
+        },
+        "include_emergency_context": {
+          "type": "boolean",
+          "description": "Whether content relates to emergency usage"
+        },
+        "cultural_variation_notes": {
+          "type": "string",
+          "description": "Notes on cultural variation in device usage or availability",
+          "maxLength": 500
+        }
+      },
+      "additionalProperties": false
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date profile was created"
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date",
+      "description": "Date profile was last reviewed"
+    },
+    "next_review": {
+      "type": "string",
+      "format": "date",
+      "description": "Date profile should next be reviewed"
+    },
+    "version": {
+      "type": "string",
+      "description": "Profile version",
+      "pattern": "^\\d+\\.\\d+$",
+      "examples": ["1.0", "1.1", "2.0"]
+    }
+  },
+  "additionalProperties": false
+}

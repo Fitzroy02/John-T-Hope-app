@@ -1,0 +1,333 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hopenism.org/schemas/country_profile.schema.json",
+  "title": "Country Profile",
+  "description": "Schema for country-specific healthcare content governance profiles",
+  "type": "object",
+  "required": [
+    "id",
+    "country_name",
+    "age_of_medical_consent",
+    "restricted_topics",
+    "cultural_considerations"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the country profile (ISO 3166-1 alpha-2 country code preferred)",
+      "pattern": "^[A-Z]{2}$",
+      "examples": ["US", "GB", "CA", "AU", "IN", "JP"]
+    },
+    "country_name": {
+      "type": "string",
+      "description": "Official country name",
+      "minLength": 1,
+      "maxLength": 100,
+      "examples": ["United States", "United Kingdom", "Canada", "Australia", "India", "Japan"]
+    },
+    "age_of_medical_consent": {
+      "type": "integer",
+      "description": "Age at which individuals can consent to healthcare without parental involvement (use lowest age if varies by context)",
+      "minimum": 0,
+      "maximum": 21,
+      "examples": [16, 18]
+    },
+    "age_of_consent_notes": {
+      "type": "string",
+      "description": "Additional context about age of consent variations (e.g., mature minor doctrine, specific context variations)",
+      "maxLength": 500,
+      "examples": [
+        "Varies by state; ranges from 14-18. Mature minor doctrine applies in some states.",
+        "Generally 16, but varies by type of treatment. Sexual health services available from 13 with confidentiality.",
+        "18 in most contexts, but parental consent not required for emergency care or specific reproductive health services."
+      ]
+    },
+    "restricted_topics": {
+      "type": "array",
+      "description": "Topics that are legally restricted or culturally sensitive requiring special handling",
+      "items": {
+        "type": "object",
+        "required": ["topic", "restriction_level"],
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "Topic name",
+            "examples": [
+              "abortion",
+              "gender-affirming care",
+              "sexual health",
+              "mental health",
+              "substance use",
+              "contraception"
+            ]
+          },
+          "restriction_level": {
+            "type": "string",
+            "description": "Level of restriction",
+            "enum": [
+              "prohibited",
+              "age_restricted",
+              "parental_consent_required",
+              "culturally_sensitive"
+            ]
+          },
+          "age_restriction": {
+            "type": "integer",
+            "description": "Minimum age if age-restricted (optional)",
+            "minimum": 0,
+            "maximum": 21
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional context about the restriction",
+            "maxLength": 500
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "cultural_considerations": {
+      "type": "object",
+      "description": "Cultural factors affecting healthcare content delivery",
+      "required": ["communication_style"],
+      "properties": {
+        "communication_style": {
+          "type": "string",
+          "description": "Preferred communication directness",
+          "enum": ["direct", "indirect", "mixed"]
+        },
+        "individualism_collectivism": {
+          "type": "string",
+          "description": "Cultural tendency toward individual or collective decision-making",
+          "enum": ["individualistic", "collectivistic", "mixed"]
+        },
+        "family_involvement_expectation": {
+          "type": "string",
+          "description": "Expected level of family involvement in healthcare decisions",
+          "enum": ["low", "moderate", "high"]
+        },
+        "stigmatized_conditions": {
+          "type": "array",
+          "description": "Health conditions carrying significant stigma in this context",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["mental health conditions", "HIV/AIDS", "substance use disorders", "sexual health topics"]]
+        },
+        "traditional_medicine_integration": {
+          "type": "string",
+          "description": "Extent of traditional medicine practice",
+          "enum": ["minimal", "moderate", "significant"]
+        },
+        "gender_considerations": {
+          "type": "string",
+          "description": "Gender-related healthcare cultural factors",
+          "maxLength": 500,
+          "examples": [
+            "Gender-egalitarian context; mixed-gender healthcare discussions normalized.",
+            "Gender-segregated healthcare discussions preferred. Female healthcare topics especially sensitive.",
+            "Modesty considerations important. Gender of healthcare provider may be preference or requirement."
+          ]
+        },
+        "religious_healthcare_considerations": {
+          "type": "string",
+          "description": "Religious factors affecting healthcare beliefs or practices",
+          "maxLength": 500,
+          "examples": [
+            "Diverse religious contexts; some communities have specific healthcare practices based on faith.",
+            "Majority Muslim context; halal considerations, modesty, prayer times, Ramadan fasting health implications.",
+            "Varied religious contexts including restrictions on blood transfusions (Jehovah's Witnesses), dietary laws affecting medical nutrition."
+          ]
+        },
+        "additional_notes": {
+          "type": "string",
+          "description": "Any other relevant cultural considerations",
+          "maxLength": 1000
+        }
+      },
+      "additionalProperties": false
+    },
+    "legal_notes": {
+      "type": "object",
+      "description": "Legal requirements specific to healthcare content in this jurisdiction",
+      "properties": {
+        "mandatory_reporting": {
+          "type": "object",
+          "description": "Mandatory reporting obligations",
+          "properties": {
+            "child_abuse": {
+              "type": "boolean",
+              "description": "Whether child abuse must be reported"
+            },
+            "self_harm_risk": {
+              "type": "boolean",
+              "description": "Whether self-harm risk must be reported"
+            },
+            "reporting_authority": {
+              "type": "string",
+              "description": "Authority to which reports must be made",
+              "examples": ["Child Protective Services", "Local law enforcement", "Social services"]
+            },
+            "notes": {
+              "type": "string",
+              "description": "Additional context about mandatory reporting",
+              "maxLength": 500
+            }
+          },
+          "additionalProperties": false
+        },
+        "data_protection": {
+          "type": "string",
+          "description": "Data protection requirements specific to health data",
+          "maxLength": 500,
+          "examples": [
+            "HIPAA compliance required for health information.",
+            "GDPR applies with additional health data protections.",
+            "Local data protection laws require health data remain in-country."
+          ]
+        },
+        "parental_notification_laws": {
+          "type": "string",
+          "description": "Laws requiring parental notification for healthcare services or information",
+          "maxLength": 500,
+          "examples": [
+            "Parental notification required for reproductive health services for minors under 16.",
+            "No parental notification laws; minors can access confidential healthcare from age 14.",
+            "Varies by state; some require parental notification for abortion, others do not."
+          ]
+        },
+        "content_regulation": {
+          "type": "string",
+          "description": "Content regulation laws affecting healthcare information for minors",
+          "maxLength": 500,
+          "examples": [
+            "No specific content regulation for healthcare education.",
+            "Sexual health education content regulated; must align with national curriculum standards.",
+            "Prohibition on discussing certain topics with minors without parental consent."
+          ]
+        },
+        "additional_legal_requirements": {
+          "type": "string",
+          "description": "Any other relevant legal requirements",
+          "maxLength": 1000
+        }
+      },
+      "additionalProperties": false
+    },
+    "healthcare_system_notes": {
+      "type": "string",
+      "description": "Relevant information about healthcare system (access, insurance, provider types) that affects content contextualization",
+      "maxLength": 1000,
+      "examples": [
+        "Universal healthcare system (NHS). Primary care through GP referral. Most services free at point of use.",
+        "Mixed private/public insurance system. Many uninsured or underinsured. Cost is significant barrier to care.",
+        "Universal healthcare with private option. Most citizens have access to subsidized care."
+      ]
+    },
+    "emergency_resources": {
+      "type": "object",
+      "description": "Emergency contact information for this country",
+      "required": ["emergency_services_number"],
+      "properties": {
+        "emergency_services_number": {
+          "type": "string",
+          "description": "Emergency services phone number",
+          "examples": ["911", "999", "112", "000"]
+        },
+        "crisis_hotlines": {
+          "type": "array",
+          "description": "Mental health crisis hotlines",
+          "items": {
+            "type": "object",
+            "required": ["name", "number"],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "hours": {
+                "type": "string",
+                "examples": ["24/7", "9am-5pm local time"]
+              },
+              "notes": {
+                "type": "string",
+                "maxLength": 200
+              }
+            }
+          }
+        },
+        "text_support_services": {
+          "type": "array",
+          "description": "Text-based crisis support services",
+          "items": {
+            "type": "object",
+            "required": ["name", "number_or_service"],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "number_or_service": {
+                "type": "string",
+                "description": "Phone number or service identifier (e.g., 'Text HOME to 741741')"
+              },
+              "hours": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "online_support": {
+          "type": "array",
+          "description": "Online chat or support services",
+          "items": {
+            "type": "object",
+            "required": ["name", "url"],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "hours": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "tier": {
+      "type": "integer",
+      "description": "Country tier (1=full profile, 2=secondary, 3=basic) for implementation prioritization",
+      "enum": [1, 2, 3],
+      "default": 3
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date profile was created"
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date",
+      "description": "Date profile was last reviewed"
+    },
+    "next_review": {
+      "type": "string",
+      "format": "date",
+      "description": "Date profile should next be reviewed"
+    },
+    "version": {
+      "type": "string",
+      "description": "Profile version",
+      "pattern": "^\\d+\\.\\d+$",
+      "examples": ["1.0", "1.1", "2.0"]
+    }
+  },
+  "additionalProperties": false
+}
