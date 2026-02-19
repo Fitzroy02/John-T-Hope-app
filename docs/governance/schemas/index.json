@@ -1,1 +1,33 @@
-{\n  "$schema": "http://json-schema.org/draft-07/schema#",\n  "title": "Schema Registry Index",\n  "description": "Index of all JSON schemas used by the Hopenism.org.uk platform and the John T Hope Centre.",\n  "schemas": [\n    {\n      "id": "consent_status",\n      "title": "Consent Status Schema",\n      "url": "https://hopenism.org.uk/schemas/consent_status.schema.json",\n      "version": "1.0.0"\n    }\n  ]\n}
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Schema Registry Index",
+  "description": "Index of all JSON schemas used by the Hopenism.org.uk platform and the John T Hope Centre.",
+  "version": "1.0.0",
+  "last_updated": "2026-02-19T04:50:00Z",
+  "schemas": [
+    {
+      "id": "consent_status",
+      "title": "Consent Status Schema",
+      "url": "https://hopenism.org.uk/schemas/consent_status.schema.json",
+      "version": "1.0.0",
+      "governance_domain": "consent",
+      "description": "Defines the structure for tracking consent for learner interactions and content access"
+    },
+    {
+      "id": "age_tier",
+      "title": "Age Tier Schema",
+      "url": "https://hopenism.org/schemas/age_tier.schema.json",
+      "version": "1.0.0",
+      "governance_domain": "curriculum",
+      "description": "Defines the structure for age-tier classification in curriculum governance"
+    },
+    {
+      "id": "safeguarding_incident",
+      "title": "Safeguarding Incident Schema",
+      "url": "https://hopenism.org/schemas/safeguarding_incident.schema.json",
+      "version": "1.0.0",
+      "governance_domain": "safeguarding",
+      "description": "Schema for recording safeguarding incidents in the John T Hope Centre incident registry"
+    }
+  ]
+}
